@@ -1,0 +1,31 @@
+# Žáčkoviny
+
+Projekt na převedení dětských knih nakladatelství ŠULC-ŠVARC do elektronické
+podoby.
+
+## Kontakty
+
+Zadavatel:
+
+Nakladatelství ŠULC-ŠVARC, s.r.o.
+Veronika Baštová
+Oldřichova 52
+128 00 Praha 2
+
+tel: +420 234 090 056
+mobil: +420 724 11 61 62
+
+email: bastova@notesnet.cz
+
+Vyhotovitel:
+
+LastStar.eu s.r.o.
+Josef Pospíšil
+Husova 1200/63
+460 01 Liberec 1
+
+mobil: +420 774 278 707
+
+Petr Záhorka
+
+mobil: +420 775 138 392
