@@ -1,0 +1,9 @@
+# Průběh projektu iPad hádanky a luštěniny
+
+1. domluvit s programátory jaké si představují podmínky
+2. sepsat všechny naše požadavky a náměty na prototyp
+3. poslat k posouzení p. Baštové
+4. vytvořit prototyp pokud 3. dopadne
+5. odprezentovat prototyp
+6. dohodnout podmínky pro vlastní vývoj, včetně smlouvy, harmonogramů a pod
+7. po podepsání smlouvy začít vyvíjet
