@@ -7,3 +7,18 @@
 5. odprezentovat prototyp
 6. dohodnout podmínky pro vlastní vývoj, včetně smlouvy, harmonogramů a pod
 7. po podepsání smlouvy začít vyvíjet
+
+2.1. html část pro prototyp
+
+mám pár dotazu k vyplodění obsahu pro prototyp, pokud to klapne mám tak 5x tolik na funkčnost v knížce :)
+
+- jaké jsou rozměry webkitu v aplikaci resp. jaká je délka a výška stránky?
+- kolik stránek udělat?
+- patička stránky je vždy stejná?
+- uchovává si stránka svůj stav, tj. jestli po vyřešení puzzle, jejím opuštění a následně návratu bude puzzle ve stavu který jsme opustili nebo resetovane?
+- co se má objevit na tapnutí linku "nápověda"?
+- co se má objevit na tapnutí linku "jak na to"?
+
+2.2. iOS část pro prototyp
+
+todo

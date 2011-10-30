@@ -1,0 +1,206 @@
+* {
+  padding: 0;
+  margin: 0;
+  border: 0;
+  outline: 0;
+}
+
+body {
+  font-family: "Hiragino Mincho ProN", Helvetica, Arial, Sans-serif;
+  font-size: 20px;
+  color: #000;
+  background #fff;
+  -webkit-overflow-scrolling: touch;
+}
+
+h1 {
+  color: #227fba;
+  font-size: 30px;
+  margin: 45px 0 30px 50px;  
+}
+
+p {
+  
+}
+
+.hidden {
+  display: none;
+}
+
+.sheet {
+  width: 748px;
+  height: 943px;
+  border: 2px dashed red;
+  -webkit-user-select: none; /* disable cut copy paste */
+  -webkit-touch-callout: none; /* disable callout save image panel */
+  -webkit-tap-highlight-color: rgba(0,0,0,0); /* disable link highlight */
+}
+
+.result {
+  width: 276px;
+  height: 119px;
+  margin: 60px auto 0 auto;
+  opacity: 0;
+  background: url(spravne.png) no-repeat;
+}
+
+.result.finished {
+  opacity: 1;
+  -webkit-transition:opacity 0.4s ease-in-out;  
+}
+
+/*
+  Debug area
+*/
+
+.debug {
+  font-family: Helvetica;
+  font-size: 12px;
+  position: absolute;
+  padding: 10px;
+  top: 10px;
+  left:10px;
+  width: 708px;
+  background: rgba(0,0,0,0.2);
+  border-radius: 10px;
+}
+
+.debug:before {
+  content: '@debug: ';
+}
+
+/*
+  Riddle styles
+*/
+
+.riddle {
+  width: 748px;
+}
+
+.riddle li {
+  list-style: none;
+  padding-left: 50px;
+  height: 112px;
+  line-height: 112px;
+  background-color: #fafafa;
+}
+
+.riddle li:nth-child(odd) {
+  background-color: #f1f1f1;
+}
+
+.riddle li.complete {
+  background-color: #e6ffcd;
+}
+
+.riddle li:nth-child(odd).complete {
+  background-color: #d7ebc4;
+}
+
+
+.riddle li.above,
+.riddle li:nth-child(odd).above {
+  background-color: #ffe397;
+}
+
+img.answer {
+  position: absolute;
+  top: 630px;
+  z-index: 10;
+}
+
+img.answer.animate {
+  -webkit-transition:all 0.5s cubic-bezier(0,0,0,1);  
+}
+
+img.answer.one {
+  left: 30px;
+  width: 165px;
+  height: 103px;
+}
+
+img.answer.two {
+  left: 235px;
+  width: 132px;
+  height: 106px;
+}
+
+img.answer.three {
+  left: 405px;
+  top: 670px;
+  width: 146px;
+  height: 38px;
+}
+
+img.answer.four {
+  left: 585px;
+  width: 133px;
+  height: 107px;
+}
+
+
+/*
+  Sheet menu styles
+*/
+
+.menu {
+  background-color: #8ccbf3;
+  border-top: 1px solid #bae0f8;
+  width: 748px;
+  height: 92px;
+  position: absolute;
+  top: 851px;
+}
+
+.menu li {
+  float: left;
+  height: 55px;
+  margin-top: 17px;
+  list-style: none;
+}
+
+.menu li a {
+  background: url(menu.png) no-repeat left top;
+  display: block;
+  width: 100%;
+  height: 55px;
+}
+
+.menu li.howto a {
+  background-position: 0 -55px;
+}
+
+.menu li.help a {
+  background-position: -177px -55px;
+}
+
+.menu li.reset a {
+  background-position: -356px -55px;
+}
+
+.menu li.howto a.highlight {
+  background-position: 0 0;
+}
+
+.menu li.help a.highlight {
+  background-position: -177px 0;
+}
+
+.menu li.reset a.highlight {
+  background-position: -356px 0;
+}
+
+.menu li.howto {
+  margin-left: 35px;
+  width: 177px;
+}
+
+.menu li.help {
+  margin-left: 50px;
+  width: 179px;
+}
+
+.menu li.reset {
+  margin-left: 42px;
+  width: 221px;
+}
