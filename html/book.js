@@ -17,6 +17,147 @@ $(document).ready(function(){
     
     /*
     ----------------------------------------
+        Matching stuff
+    ----------------------------------------
+    */
+    
+    var canvas = document.getElementById('canvas');
+    
+    if (canvas) {
+        var image = new Image(),
+            secondImageOffset = 334,
+            tapEvent = undefined,
+            canvasContext = canvas.getContext('2d'),        
+            canvasFrame = {
+                origin: {
+                    x: canvas.offsetLeft,
+                    y: canvas.offsetTop
+                },
+                size: {
+                    width: canvas.width,
+                    height: canvas.height
+                }
+            };
+
+        // Add load event for image to load it into the canvas.
+        image.addEventListener('load', function() {
+            canvasContext.drawImage(image, 0, 0, image.width, image.height);
+        }, false);
+        image.src = 'matches.png';
+    }     
+        
+    // Items coordinates.
+    var items = [
+        {selected:false,rgb:'255,0,0',x1:20,y1:40,x2:70,y2:70},
+        {selected:false,rgb:'255,0,0',x1:5,y1:160,x2:145,y2:230},
+        {selected:false,rgb:'255,0,0',x1:145,y1:370,x2:220,y2:422},
+        {selected:false,rgb:'255,0,0',x1:255,y1:101,x2:315,y2:212},
+        {selected:false,rgb:'255,0,0',x1:185,y1:230,x2:230,y2:266},
+        {selected:false,rgb:'255,0,0',x1:138,y1:5,x2:180,y2:69},
+        {selected:false,rgb:'255,0,0',x1:170,y1:275,x2:200,y2:305}
+    ];
+    
+    // Debug functions to snapshow rect for the tap area.
+    var initialDebugPoint = { };
+
+    $('#canvas').bind('mousedown', function(event) {
+        initialDebugPoint = {
+            x: event.pageX - canvasFrame.origin.x,
+            y: event.pageY - canvasFrame.origin.y
+        };
+    });
+
+    $('#canvas').bind('mouseup', function(event) {
+        var x1 = initialDebugPoint.x,
+            y1 = initialDebugPoint.y,
+            x2 = event.pageX - canvasFrame.origin.x,
+            y2 = event.pageY - canvasFrame.origin.y;
+        
+        log('{x1:' + x1 + ',y1:' + y1 + ',x2:' + x2 + ',y2:' + y2 + '} ');
+    });
+    
+    // Simulate delayless tap.
+    if (canvas) {
+        canvas.addEventListener('click', function() {
+
+        }, false);
+        canvas.addEventListener('touchstart', function(event) {
+            tapEvent = event;
+        }, false);
+        
+        canvas.addEventListener('touchmove', function(event) {
+            tapEvent = undefined;
+        }, false);
+
+        canvas.addEventListener('touchend', function(event) {
+            if (tapEvent !== undefined) {
+                checkMatches(tapEvent);
+            }
+        }, false);
+    }
+    
+    // Check correct places for the matches on tap.
+    function checkMatches(event) {
+        var found = false,
+            tp = {
+                x: event.pageX - canvasFrame.origin.x,
+                y: event.pageY - canvasFrame.origin.y
+            };
+        
+        for (var i = 0, len = items.length; i < len; i++) {
+            var obj = items[i];
+
+            if (((tp.x >= obj.x1 && tp.x <= obj.x2) || (tp.x >= obj.x1 + secondImageOffset && tp.x <= obj.x2 + secondImageOffset)) 
+                && tp.y >= obj.y1 && tp.y <= obj.y2 && obj.selected == false) {
+                var width = obj.x2 - obj.x1,
+                    height = obj.y2 - obj.y1,
+                    x = obj.x1 + width / 2,
+                    y = obj.y1 + height / 2;
+                
+                items[i].selected = true;
+                found = true;
+                
+                drawEllipse(x, y, width, height, obj.rgb);
+                drawEllipse(x + secondImageOffset, y, width, height, obj.rgb);
+                break;
+            }
+        }
+        
+        $('#result').removeClass('wrong').removeClass('right').addClass((found === false) ? 'wrong' : 'right');
+    }
+    
+    // Elipse drawing to check images.
+    function drawEllipse(centerX, centerY, width, height, color) {
+        canvasContext.beginPath();
+        
+        canvasContext.moveTo(centerX, centerY - height/2); // A1
+
+        canvasContext.bezierCurveTo(
+            centerX + width/2, centerY - height/2, // C1
+            centerX + width/2, centerY + height/2, // C2
+            centerX, centerY + height/2 // A2
+        );
+
+        canvasContext.bezierCurveTo(
+            centerX - width/2, centerY + height/2, // C3
+            centerX - width/2, centerY - height/2, // C4
+            centerX, centerY - height/2 // A1
+        );
+
+        canvasContext.closePath(); 
+        canvasContext.lineWidth = 2;
+        canvasContext.shadowOffsetX = 0;
+        canvasContext.shadowOffsetY = 0;
+        canvasContext.shadowBlur = 5;
+        canvasContext.shadowColor = "rgb(0,0,0)";
+        canvasContext.strokeStyle = "rgba(" + color + ",0.8)";
+        canvasContext.fillStyle = "rgba(" + color + ",0.5)";
+        canvasContext.fill();
+        canvasContext.stroke();
+    }
+    
+    /*
+    ----------------------------------------
         Dragging stuff
     ----------------------------------------
     */
@@ -244,18 +385,32 @@ $(document).ready(function(){
        event.preventDefault();
        
        // Remove green cloud.
-       $('#result').removeClass('finished');
+       $('#result').removeClass('finished').removeClass('right').removeClass('wrong');
+      
+       // Reset canvas.
+       if (canvas) {
+           canvas.width = canvas.width;
+
+           var refreshImage = new Image();
+           refreshImage.addEventListener('load', function() {
+               canvasContext.drawImage(image, 0, 0, image.width, image.height);
+           }, false);
+           refreshImage.src = 'matches.png';
+           
+           for (var i = 0, len = items.length; i < len; i++) {
+               items[i].selected = false;
+           }
+       }
        
        // Reset answers and questions.
        $('.answer').each(function() {
            $(this).removeClass('pinned').attr('style', '');
        });
-       
+
        for (var i = 0; i < question.length; i++) {
            $(question[i].node).removeClass('complete');
            question[i].finished = false;
        }
-       
    }, false);    
    
 });

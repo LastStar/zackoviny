@@ -14,12 +14,21 @@
 
   <body>
     
-    <div class="sheet">
-
+    <div class="debug hidden" id="debug"></div>
+    
+    <div class="sheet" id="sheet">
+      <h1>Trosečník</h1>
+      
+      <p>Najděte 7 rozdílů mezi obrázky trosečníka. V nápovědě se můžete přesvědčit, zda jste hledali správně.</p>
+      
+      <canvas class="matches" id="canvas" width="653" height="452"></canvas>
+      
+      <div class="result" id="result"></div>
+      
       <ul class="menu">
-        <li class="howto"><a href="#"></a></li>
-        <li class="help"><a href="#"></a></li>
-        <li class="reset"><a href="#"></a></li>
+        <li class="howto"><a href="#" id="howto"></a></li>
+        <li class="help"><a href="#" id="help"></a></li>
+        <li class="reset"><a href="#" id="reset"></a></li>
       </ul>
     </div>
     
